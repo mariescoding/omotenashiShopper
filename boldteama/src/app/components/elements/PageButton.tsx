@@ -3,7 +3,7 @@ import React from 'react';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import {IconB} from "./IconButton.tsx";
+import {IconB} from "./IconButton";
 
 
 import '@fontsource/roboto/300.css';

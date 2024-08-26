@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 // props: icon name 
 
 type Props = {
-    iconName: string;
+    iconName:  React.ReactNode;
   };
 
 export const IconB : React.FC<Props> = ({iconName}) => {
