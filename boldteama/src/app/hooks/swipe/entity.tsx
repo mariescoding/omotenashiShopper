@@ -1,5 +1,5 @@
 type SwipeResult = {
-    id: number;
+   // id: number;
     productName : string;
     imageUrl : string; 
     price: string; 
@@ -10,6 +10,5 @@ type SwipeResult = {
   
 export type SwipeResultData = {
     SwipeResults: SwipeResult[];
-    itemId: string;
   };
   
