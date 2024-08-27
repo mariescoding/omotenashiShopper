@@ -1,6 +1,6 @@
 
 export type SwipeResultData = {
-   // id: number;
+    id: number;
     productName : string;
     imageUrl : string; 
     price: string; 

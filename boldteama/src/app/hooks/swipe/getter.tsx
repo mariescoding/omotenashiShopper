@@ -1,45 +1,62 @@
-import { SwipeResultSingleData } from './entity'
-import { GetServerSideProps } from 'next' 
+
+import { GetServerSideProps, NextPage } from 'next' 
+import { SwipePage } from '@/app/pages/swipe/SwipePage'
 
 interface ItemData {
   url: string, 
   summary: string
 }
 
-export const getResultData = (async () => {
+export interface SwipePageProps {
+  swipeResults: {
+    id: number;
+    productName: string;
+    imageUrl: string;
+    price: string;
+    madeInJapan: boolean;
+    categories: string[];
+  }[];
+}
 
-    // Fetch data from external API
-   
+export const getServerSideProps : GetServerSideProps<SwipePageProps> = async (context) => {
+
     const resp = await fetch("/api/openai", {
         method: "POST", 
         headers: {
           "Content-Type": "application/json",
         },
-        //body: JSON.stringify({ prompt: promptRef.current.value }),
+        body: JSON.stringify({ prompt: "test??" }),
       });
 
       if (!resp.ok) {
         throw new Error("Unable to generate the image");
       }
       
-      const data : ItemData[] = await resp.json(); 
-     
-     let dataList : SwipeResultSingleData[] = []
+    const data : ItemData[] = await resp.json(); 
 
-      data.forEach(element => {
-        let parsed: SwipeResultSingleData = {
-          productName : element.summary,
-          imageUrl : element.url ,
-          price:"aaaaa price",
-          madeInJapan: true,
-          categories: []
-        }
-        dataList.push(parsed)
-      });
+    const formattedData = data.map((image, index) => ({
+      id: index,
+      productName : image.summary,
+      imageUrl : image.url,
+      price: "70.90",
+      madeInJapan: true,
+      categories: ["Test", "Test"]
+    }));
 
-      console.log(data)
-      //data.result
+    console.log(data)
+  
+    return {
+      props: {
+        swipeResults: formattedData,
+      },
+    };;
 
-      return { dataList }
 
-  }) 
+  }
+
+  const SwipePage2: NextPage = (props) => {
+    return <SwipePage {...props} />;
+  };
+  
+  export default SwipePage2;
+  

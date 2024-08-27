@@ -1,11 +1,12 @@
+import { GetServerSideProps, NextPage } from "next";
+import React from "react";
 
-import {  SwipeResultSingleData} from './entity'
+import { SwipeResultData, SwipeResultSingleData} from './entity'
 import { getResultData } from './getter';
-
-// reference code 
+import { SwipePage } from "@/app/pages/swipe/SwipePage";
 
 // type MappingFetchResponse = (
-//     res: Awaited<ReturnType<typeof getResultData>>
+//     res: Awaited<ReturnType<typeof getServerSideProps>>
 //   ) => SwipeResultSingleData[]; 
   
 // const mapFetchResponse: MappingFetchResponse = (response) => {
@@ -13,7 +14,7 @@ import { getResultData } from './getter';
 //   console.log("Calling function mapFetchResponse:")
 //   console.log(response)
 
-//   const SwipeResults : SwipeResultData = response.map((image, index) => ({
+//   const SwipeResults: SwipeResultData = response.map((image, index) => ({
 //       productName: image.summary ,
 //       imageUrl: image.url, 
 //       price: '50.00', 
@@ -26,22 +27,42 @@ import { getResultData } from './getter';
 // };
 
 
-type GetResultDataHandler = () => Promise<SwipeResultSingleData[]>; 
+// type GetResultDataHandler = () => Promise<SwipeResultSingleData[]>; 
 
-export const getResultDataHandler: GetResultDataHandler = async () => {
-      try {
-        console.log("getResultDataHandler try clause")
+// export const getResultDataHandler: GetResultDataHandler = async () => {
+//       try {
+//         console.log("getResultDataHandler try clause")
         
+//         const results = await getResultData();
+  
+//         return mapFetchResponse(
+//             results
+//         );
+//        //return results.dataList
+        
+//       } catch {
+//         console.log("getResultDataHandler catch clause")
+//         return []
+//       }
+// };
+  
+// new way
+
+export const getServerSideProps: GetServerSideProps = async () => {
+     
         const results = await getResultData();
   
-        // return mapFetchResponse(
-        //     results
-        // );
-       return results.dataList
-        
-      } catch {
-        console.log("getResultDataHandler catch clause")
-        return []
-      }
+        return (
+          props: {
+            results
+          } 
+        );
+       
+      
 };
   
+const SwipePage2: NextPage = (props) => {
+  return <SwipePage {...props}/>
+}
+
+export default SwipePage2;
