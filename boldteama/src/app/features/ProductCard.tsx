@@ -14,7 +14,6 @@ type Props = {
     imageurl: string;
     name: string; 
     price: string; 
-    //categories: Array; 
 }
 
 export const ProductCard: React.FC<Props>  = ({ imageurl, name, price}) => {

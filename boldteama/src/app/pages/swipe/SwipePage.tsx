@@ -8,13 +8,52 @@ import { RushUser} from '@/app/features/RushUser'
 import { SwipeHeader } from '@/app/features/SwipeHeader';
 import { AddCartButton } from '@/app/features/AddCart';
 
-//import { getResultDataHandler } from '@/app/hooks/swipe/handler';
-import { SwipePageProps, getServerSideProps } from '@/app/hooks/swipe/getter';
-import { SwipeResultSingleData } from '@/app/hooks/swipe/entity';
+const SwipeResults = [
+    
+    {
+        id: 1,
+        productName : "Brown Coach Bag",
+        imageUrl : "https://img.lazcdn.com/g/ff/kf/Se22b457e44634748af4ba017931c2214E.jpg_720x720q80.jpg",
+        price: "50.00",
+        madeInJapan: false,
+        categories: ["Ladies fashion", "Luxury Items", "Coach Bag"]
+    }, 
+    {
+        id: 2,
+        productName : "Plain Japanese Bag",
+        imageUrl : "https://blog.janbox.com/wp-content/uploads/2022/09/japanese-handbag-brands-yoshida.jpg",
+        price: "10.00",
+        madeInJapan: true,
+        categories: ["Ladies fashion", "Small Items", "Hand Bag"]
+    }, 
+    {
+        id: 3,
+        productName : "Chanel Hand Bag",
+        imageUrl : "https://loveluxury.co.uk/wp-content/uploads/2020/12/Chanel-Bag.jpg",
+        price: "100.00",
+        madeInJapan: true,
+        categories: ["Ladies fashion", "Luxury Items", "Chanel Bag"]
+    }, 
+    {
+        id: 4,
+        productName : "Brown Coach Bag",
+        imageUrl : "https://img.lazcdn.com/g/ff/kf/Se22b457e44634748af4ba017931c2214E.jpg_720x720q80.jpg",
+        price: "50.00",
+        madeInJapan: false,
+        categories: ["Ladies fashion", "Luxury Items", "Coach Bag"]
+    }, 
+    {
+        id: 5,
+        productName : "Brown Coach Bag",
+        imageUrl : "https://img.lazcdn.com/g/ff/kf/Se22b457e44634748af4ba017931c2214E.jpg_720x720q80.jpg",
+        price: "50.00",
+        madeInJapan: false,
+        categories: ["Ladies fashion", "Luxury Items", "Coach Bag"]
+    }
+]
 
-
-export const SwipePage: React.FC <SwipePageProps> = ({swipeResults}) => {
-    console.log("SwipeResults:", swipeResults);
+export const SwipePage: React.FC  = ( ) => {
+   
 
     return (
         <Container maxWidth="sm"> 
@@ -32,8 +71,9 @@ export const SwipePage: React.FC <SwipePageProps> = ({swipeResults}) => {
             />
             <SwipeHeader />   
 
-            {swipeResults.length > 0 ? (
-                swipeResults.map((item) => (
+            {
+                SwipeResults.map((item) => (
+
                     <Stack direction="column"
                         justifyContent="center"
                         alignItems="center"
@@ -44,10 +84,8 @@ export const SwipePage: React.FC <SwipePageProps> = ({swipeResults}) => {
                         <ChipGroup categoryList={item.categories} isJapan={item.madeInJapan} />
                
                     </Stack>
-                )))
-                :(
-                    <p>No data available</p>
-                )
+                ))
+               
             }
 
     

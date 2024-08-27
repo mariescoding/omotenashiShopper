@@ -6,19 +6,21 @@ import { Container, Stack, Box } from '@mui/material';
 import { SearchHeader } from '@/app/features/SearchHeader';
 import { Filters } from '@/app/features/Filters';
 
-import { useState } from "react";
-import { useGenerateImage } from '@/app/backend/openAi/backend'
-
 //import { SwipeResults } from '@/app/demoData/SwipeResults'
 
 // get generate function from getter
 
-export const SearchResultPage: React.FC = ({generateItems}) => {
+// const handleClick: any () { 
+//     // move to Swipe Page 
+
+// }
+
+export const SearchResultPage: React.FC = () => {
     return (
         
         <>
-        <SearchHeader/>
-        <Filters generateItems= {generateItems} />
+        <SearchHeader promptRef={promptRef} />
+        <Filters handleClick= {generateImage} />
 
         <Box 
             component="img"
