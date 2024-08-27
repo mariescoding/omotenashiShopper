@@ -6,26 +6,22 @@ import { Container, Stack, Box } from '@mui/material';
 import { SearchHeader } from '@/app/features/SearchHeader';
 import { Filters } from '@/app/features/Filters';
 
-//import { SwipeResults } from '@/app/demoData/SwipeResults'
+type Props = {
+    promptRef: Object;
+    generateImage:  () => void ; 
+}
 
-// get generate function from getter
-
-// const handleClick: any () { 
-//     // move to Swipe Page 
-
-// }
-
-export const SearchResultPage: React.FC = () => {
+export const SearchResultPage: React.FC <Props>= ({promptRef, generateImage}) => {
     return (
         
         <>
         <SearchHeader promptRef={promptRef} />
-        <Filters handleClick= {generateImage} />
+        <Filters handleClick= {generateImage} page="/swipe" />
 
         <Box 
             component="img"
-            src="/assets/tempGallery.png"
-            alt="My Image"
+            src="../public/assets/tempGallery.png"
+            alt="gallery"
             sx={{width: '100%', height: 'auto'}}
         >
         </Box>

@@ -8,7 +8,7 @@ import { IconB } from '@/app/components/elements/IconButton';
 import { SearchBar } from '../components/elements/SearchBar';
 
 type Props = {
-    promptRef:;
+    promptRef:Object;
     
 }
 

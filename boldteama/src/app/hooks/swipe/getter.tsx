@@ -1,6 +1,6 @@
 
 import { GetServerSideProps, NextPage } from 'next' 
-import { SwipePage } from '@/app/pages/swipe/SwipePage'
+import { SwipePage } from '@/pages/swipe/SwipePage'
 
 interface ItemData {
   url: string, 
