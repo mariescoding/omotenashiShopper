@@ -1,4 +1,5 @@
-type SwipeResult = {
+
+export type SwipeResultData = {
    // id: number;
     productName : string;
     imageUrl : string; 
@@ -6,9 +7,15 @@ type SwipeResult = {
     madeInJapan: boolean;
     categories: string[];
   
-  };
-  
-export type SwipeResultData = {
-    SwipeResults: SwipeResult[];
-  };
+  }[];
+
+
+  export type SwipeResultSingleData = {
+    // id: number;
+     productName : string;
+     imageUrl : string; 
+     price: string; 
+     madeInJapan: boolean;
+     categories: string[];
+   };
   

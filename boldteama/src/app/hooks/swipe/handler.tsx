@@ -1,44 +1,47 @@
 
-import { SwipeResultData } from './entity'
+import {  SwipeResultSingleData} from './entity'
 import { getResultData } from './getter';
 
 // reference code 
 
-type MappingFetchResponse = (
-    res: Awaited<ReturnType<typeof getResultData>>
-  ) => SwipeResultData;
+// type MappingFetchResponse = (
+//     res: Awaited<ReturnType<typeof getResultData>>
+//   ) => SwipeResultSingleData[]; 
   
-const mapFetchResponse: MappingFetchResponse = (response) => {
+// const mapFetchResponse: MappingFetchResponse = (response) => {
 
-  console.log()
+//   console.log("Calling function mapFetchResponse:")
+//   console.log(response)
 
-  const SwipeResults = response.map((image, index) => ({
-      productName: image.summary ,
-      imageUrl: image.url, 
-      price: '50.00', 
-      madeInJapan: true, 
-      categories: [ "Ladies fashion", "Luxury Items", "Coach Bag"],
-}));
+//   const SwipeResults : SwipeResultData = response.map((image, index) => ({
+//       productName: image.summary ,
+//       imageUrl: image.url, 
+//       price: '50.00', 
+//       madeInJapan: true, 
+//       categories: [ "Ladies fashion", "Luxury Items", "Coach Bag"],
+//   }));
 
-return { SwipeResults };
+//   return { SwipeResults };
 
-    };
+// };
 
 
-type GetResultDataHandler = () => Promise<SwipeResultData>; 
+type GetResultDataHandler = () => Promise<SwipeResultSingleData[]>; 
 
 export const getResultDataHandler: GetResultDataHandler = async () => {
       try {
+        console.log("getResultDataHandler try clause")
+        
         const results = await getResultData();
   
-        return mapFetchResponse(
-            results
-        );
-
+        // return mapFetchResponse(
+        //     results
+        // );
+       return results.dataList
+        
       } catch {
-        return {
-            SwipeResultData: null,
-        };
+        console.log("getResultDataHandler catch clause")
+        return []
       }
 };
   

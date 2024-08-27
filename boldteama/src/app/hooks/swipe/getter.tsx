@@ -1,7 +1,10 @@
-import { SwipeResultData } from './entity'
+import { SwipeResultSingleData } from './entity'
 import { GetServerSideProps } from 'next' 
 
-
+interface ItemData {
+  url: string, 
+  summary: string
+}
 
 export const getResultData = (async () => {
 
@@ -19,10 +22,24 @@ export const getResultData = (async () => {
         throw new Error("Unable to generate the image");
       }
       
-      const data = await resp.json(); 
+      const data : ItemData[] = await resp.json(); 
+     
+     let dataList : SwipeResultSingleData[] = []
 
+      data.forEach(element => {
+        let parsed: SwipeResultSingleData = {
+          productName : element.summary,
+          imageUrl : element.url ,
+          price:"aaaaa price",
+          madeInJapan: true,
+          categories: []
+        }
+        dataList.push(parsed)
+      });
+
+      console.log(data)
       //data.result
 
-      return { data }
+      return { dataList }
 
   }) 
