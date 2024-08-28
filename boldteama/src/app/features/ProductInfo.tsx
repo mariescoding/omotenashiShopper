@@ -35,7 +35,7 @@ export const ProductInfo: React.FC<Props>  = ({item, key}) => {
             justifyContent="center"
             alignItems="center"
             spacing={2} 
-            sx={{flex: "0 0 100%" , minWidth: 0 , transform: 'translate3d(0, 0, 0)', mr: '20px'}}
+            sx={{flex: "0 0 100%" , minWidth: 0 , transform: 'translate3d(0, 0, 0)', mr: '0px'}}
             >
         
             <ProductCard imageurl= {item.imageUrl} name= {item.productName} price = {item.price} />     

@@ -7,7 +7,7 @@ export const AddCartButton : React.FC = () => {
 
        <Box 
        component="img"
-       src="/assets/addCart.png"
+       src="src/public/assets/addCart.png"
        alt="My Image"
        sx={{width: '100%', height: 'auto', position:"absolute", bottom:0}}
        >

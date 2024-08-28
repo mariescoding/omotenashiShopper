@@ -1,25 +1,23 @@
+'use client'
+
 import React from 'react';
 
 import { Container, Stack, Box, getBottomNavigationActionUtilityClass } from '@mui/material';
 
-import { ProductCard } from '@/app/features/ProductCard';
-import { ChipGroup } from '@/app/features/ChipGroup';
-import { RushUser} from '@/app/features/RushUser'
-import { SwipeHeader } from '@/app/features/SwipeHeader';
 import { AddCartButton } from '@/app/features/AddCart';
 
-import { useSwipeable } from 'react-swipeable';
-import SwipeableViews from 'react-swipeable-views';
+import useEmblaCarousel from 'embla-carousel-react'
+import { ImageCarousel } from '../../app/features/ImageCarousel';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link'
+
 
 interface RenderedImage {
     url: string;
     summary: string;
   }
   
-  interface SwipeResultData {
+export interface SwipeResultData {
     id: number;
     productName: string;
     imageUrl: string;
@@ -29,64 +27,77 @@ interface RenderedImage {
   }
   
 
+  const SwipeResults = [
+    
+    {
+        id: 1,
+        productName : "Brown Coach Bag",
+        imageUrl : "https://img.lazcdn.com/g/ff/kf/Se22b457e44634748af4ba017931c2214E.jpg_720x720q80.jpg",
+        price: "50.00",
+        madeInJapan: false,
+        categories: ["Ladies fashion", "Luxury Items", "Coach Bag"]
+    }, 
+    {
+        id: 2,
+        productName : "Plain Japanese Bag",
+        imageUrl : "https://blog.janbox.com/wp-content/uploads/2022/09/japanese-handbag-brands-yoshida.jpg",
+        price: "10.00",
+        madeInJapan: true,
+        categories: ["Ladies fashion", "Small Items", "Hand Bag"]
+    }, 
+    {
+        id: 3,
+        productName : "Chanel Hand Bag",
+        imageUrl : "https://loveluxury.co.uk/wp-content/uploads/2020/12/Chanel-Bag.jpg",
+        price: "100.00",
+        madeInJapan: true,
+        categories: ["Ladies fashion", "Luxury Items", "Chanel Bag"]
+    }, 
+    {
+        id: 4,
+        productName : "Brown Coach Bag",
+        imageUrl : "https://img.lazcdn.com/g/ff/kf/Se22b457e44634748af4ba017931c2214E.jpg_720x720q80.jpg",
+        price: "50.00",
+        madeInJapan: false,
+        categories: ["Ladies fashion", "Luxury Items", "Coach Bag"]
+    }, 
+    {
+        id: 5,
+        productName : "Brown Coach Bag",
+        imageUrl : "https://img.lazcdn.com/g/ff/kf/Se22b457e44634748af4ba017931c2214E.jpg_720x720q80.jpg",
+        price: "50.00",
+        madeInJapan: false,
+        categories: ["Ladies fashion", "Luxury Items", "Coach Bag"]
+    }
+]
+
 export default function SwipePage () {
 
     const [renderedImage, setRenderedImage] = useState<SwipeResultData[]> ([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    // useEffect(() => {
-    //     const storedImages = localStorage.getItem('renderedImage');
-    
-    //     if (storedImages) {
-    //         setRenderedImage(JSON.parse(storedImages));
-    //     }
-
-    // }, []);
+    const [emblaRef] = useEmblaCarousel()
 
     useEffect(() => {
         const storedImages = localStorage.getItem('renderedImage');
+    
         if (storedImages) {
-            const parsedImages = JSON.parse(storedImages).map((item: RenderedImage, index: number) => ({
-                id: index,
-                productName: item.summary,
-                imageUrl: item.url,
-                price: "70.90",
-                madeInJapan: true,
-                categories: ["Test", "Test"]
-            }));
-            setRenderedImage(parsedImages);
+            setRenderedImage(JSON.parse(storedImages));
         }
-     }, []);
 
-    // const swipeResult: SwipeResultData[] = renderedImage.map((item, index) => ({
-    //     id: index,
-    //     productName: item.summary,
-    //     imageUrl: item.url,
-    //     price: "70.90", // Static price, modify as needed
-    //     madeInJapan: true, // Static value, modify as needed
-    //     categories: ["Test", "Test"], // Static categories, modify as needed
-    //   }));
+    }, []);
 
-
-      const handlers = useSwipeable({
-        onSwipedLeft: () => handleSwipe('left'),
-        onSwipedRight: () => handleSwipe('right'),
-        preventDefaultTouchmoveEvent: true,
-        trackMouse: true
-    });
-
-    const handleSwipe = (direction: string) => {
-        if (direction === 'left' && currentIndex < renderedImage.length - 1) {
-            setCurrentIndex(currentIndex + 1);
-        } else if (direction === 'right' && currentIndex > 0) {
-            setCurrentIndex(currentIndex - 1);
-        }
-    };
+    const swipeResult: SwipeResultData[] = renderedImage.map((item, index) => ({
+        id: index,
+        productName: item.summary,
+        imageUrl: item.url,
+        price: "70.90", // Static price, modify as needed
+        madeInJapan: true, // Static value, modify as needed
+        categories: ["Test", "Test"], // Static categories, modify as needed
+      }));
 
     return (
 
         <Container maxWidth="sm"> 
-            <Box
+            {/* <Box
                 sx={{
                     position: 'absolute',
                     top: '-50px',
@@ -98,51 +109,8 @@ export default function SwipePage () {
                     zIndex: 0,
                  }}
             />
-            <SwipeHeader />   
-{/* 
-            {
-                swipeResult.map((item) => (
-
-                    <Stack 
-                    direction="column"
-                        justifyContent="center"
-                        alignItems="center"
-                        spacing={2} >
-                    
-                        <ProductCard imageurl= {item.imageUrl} name= {item.productName} price = {item.price} />     
-                        <RushUser/>
-                        <ChipGroup categoryList={item.categories} isJapan={item.madeInJapan} />
-               
-                    </Stack>
-                ))
-               
-            } */}
-
-            {renderedImage.length > 0 && (
-                <Box
-                    sx={{
-                        transition: 'transform 0.3s ease',
-                        transform: `translateX(-${currentIndex * 100}%)`,
-                        display: 'flex',
-                        width: `${renderedImage.length * 100}%`,
-                    }}
-                >
-                    {renderedImage.map((item) => (
-                        <Box
-                            key={item.id}
-                            sx={{
-                                width: '100%',
-                                flexShrink: 0,
-                            }}
-                        >
-                            <ProductCard imageurl={item.imageUrl} name={item.productName} price={item.price} />
-                            <RushUser />
-                            <ChipGroup categoryList={item.categories} isJapan={item.madeInJapan} />
-                        </Box>
-                    ))}
-                </Box>
-            )}
-
+            */}
+            <ImageCarousel slides={SwipeResults} />
 
 
             {/* <AddCartButton/> */}

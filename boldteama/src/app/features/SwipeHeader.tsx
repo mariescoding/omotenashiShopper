@@ -18,7 +18,7 @@ export const SwipeHeader : React.FC = () => {
                 <IconB iconName={<ArrowBackIosNewIcon/>}/>
             </Grid>
             <Grid item xs={8}>
-                <ProgressBar/>
+               
             </Grid>
             <Grid item xs={1}>
 
